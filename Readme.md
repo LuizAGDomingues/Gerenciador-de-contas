@@ -1,1 +1,1 @@
-Gerador automático de senhas aleatórias
+Gerador automático de senhas aleatórias usando apenas Python
