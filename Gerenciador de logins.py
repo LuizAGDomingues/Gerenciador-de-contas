@@ -7,7 +7,6 @@ import os
 
 
 def isnumber(value):
-    "Função que verifica se a entrada é numérica"
     try:
         float(value)
     except ValueError:
@@ -16,12 +15,10 @@ def isnumber(value):
 
 
 def lower(value):
-    "Função para diminuir rapidamente os caracteres"
     return value.lower()
 
 
 def verifica(listaverificacao, senha):
-    "Função que verifica se a senha esta correta com os parametros estipulados"
     listpass = list(senha)
     verif = 0
 
@@ -39,7 +36,6 @@ def verifica(listaverificacao, senha):
 
 
 def gerarsenha(senha, tamanho):
-    "Função para a geração randomica de senha"
     listop = []
     listsenha = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz", "0123456789", "@#$%&!"]
     for_pass = ""
@@ -69,12 +65,10 @@ def gerarsenha(senha, tamanho):
 
 
 def consultar(mapa, sit):
-    "Função que procura o site especificado"
     print(f"{sit} -> Usuário: {mapa[sit][0]} Senha: {mapa[sit][1]}\n")
 
 
 def importardados():
-    "Função que importa os dados para a variável de controle"
     dicionario = {}
     dados = open(f"C:/Users/{getpass.getuser()}/AppData/Local/Gerenciador de Logins/Banco_de_Dados.txt", "r")
     lista = list(dados)
@@ -120,10 +114,9 @@ while cont1 == 1:
                 else:
                     print("Digite o usuário para login:")
                     usuario = input()
-                    print("Deseja digitar a nova senha ou gerar uma nova?\nDigite (digitar ou d) ou (gerar ou g) para "
-                          "escolher")
-                    escolha = lower(input())
-                    if escolha == "digitar" or escolha == "d":
+                    print("1- Digitar nova senha\n2- Gerar nova senha")
+                    escolha = input()
+                    if isnumber(escolha) and int(escolha) == 1:
                         print("Digite a senha:")
                         password = input()
                         gerenciador[site] = [usuario, password]
@@ -132,7 +125,7 @@ while cont1 == 1:
                         novo = f"{site} -> Usuário: {usuario} Senha: {password}\n"
                         doc.write(novo)
                         break
-                    elif escolha == "gerar" or escolha == "g":
+                    elif isnumber(escolha) and int(escolha) == 2:
                         print("Qual o tamanho da senha desejada?")
                         tamanho_da_senha = input()
                         if isnumber(tamanho_da_senha):
@@ -155,14 +148,13 @@ while cont1 == 1:
                     print("Não há logins catalogados")
                     break
                 else:
-                    print("Consultar todas os logins catalogados ou especificar?\n"
-                          "Digite (todos ou t) para consultar todos ou (especificar ou e) para especificar um site")
-                    opcao2 = lower(input())
-                    if opcao2 == "todos" or opcao2 == "t":
+                    print("1- Consultar todas os logins catalogados\n2- Consultar login especifico")
+                    escolha2 = input()
+                    if isnumber(escolha2) and int(escolha2) == 1:
                         for chave in gerenciador.keys():
                             print(f"{chave} -> Usuário: {gerenciador[chave][0]} Senha: {gerenciador[chave][1]}")
                         break
-                    elif opcao2 == "especificar" or opcao2 == "e":
+                    elif isnumber(escolha2) and int(escolha2) == 2:
                         print("Digite o site para qual deseja consultar o login:")
                         site = lower(input())
                         if site not in gerenciador:
@@ -176,14 +168,13 @@ while cont1 == 1:
                         break
         elif int(opcao) == 3:
             while cont1_3 == 1:
-                print("Deseja apagar todo o conteudo ou especificar?\nDigite (todos ou t) para apagar todos "
-                      "ou (especificar ou e) para especificar um site")
-                opcao3 = lower(input())
-                if opcao3 == "todos" or opcao3 == "t":
+                print("1- Apagar todo o conteudo\n2- Apagar login especifico")
+                escolha3 = input()
+                if isnumber(escolha3) and int(escolha3) == 1:
                     gerenciador.clear()
                     print("Todos os dados foram apagados")
                     break
-                elif opcao3 == "especificar" or opcao3 == "e":
+                elif isnumber(escolha3) and int(escolha3) == 2:
                     print("Digite o site que deseja apagar o login")
                     site = lower(input())
                     if site not in gerenciador:
